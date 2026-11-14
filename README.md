@@ -53,6 +53,13 @@ with the whole order typed out.
 - Order types and the pre-selected one: `restaurant.orderTypes`, `restaurant.defaultOrderType`.
 - Links: `/#order` opens the order popup, `/?order=pickup#order` pre-selects Pickup.
 
+## Link preview (WhatsApp, Facebook, iMessage)
+
+Pasting the site link shows the big **ORDER NOW** picture `assets/img/og-order-now.jpg` (1200 x 630, under 100 KB),
+set by the `og:` tags at the top of `index.html`. Chat apps keep old previews for a while: after changing the picture,
+give it a new file name (and update the tags) so the new one is fetched. In WhatsApp, paste the link and wait a moment
+for the big preview to appear before sending.
+
 ## Changing the menu
 
 - **Price / name / description:** edit `assets/js/menu-data.js`, commit, push. Live in about a minute.
@@ -77,7 +84,8 @@ it shows an example-meal collage (see `SQUARE_COLLAGES` in `tools/build_images.p
 pip install pillow "qrcode[pil]" pymupdf opencv-python-headless zxing-cpp
 python tools/build_images.py      # menu photos + combo collages -> assets/img/menu
 python tools/build_wordmark.py    # EASTERN SPECIAL Inihaw wordmark -> assets/img/wordmark.svg + index.html
-python tools/build_assets.py      # QR code, table card, icons, share image
+python tools/build_assets.py      # QR code, table card, icons
+python tools/build_share_image.py # link-preview picture for WhatsApp etc. (needs Chrome + Node)
 python tools/build_qr_poster.py   # A5 poster PDF/PNG + scan check (needs Chrome; fonts in tools/fonts, SIL OFL)
 python tools/build_menu_card.py   # menu card PDFs (A3, A4, A5) + previews + /qr/menucard/ page (needs Chrome + Node)
 python tools/build_visiting_card.py   # visiting card PDF + PNGs (needs Chrome)

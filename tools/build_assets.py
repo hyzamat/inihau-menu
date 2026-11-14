@@ -1,5 +1,6 @@
 """
-Builds the QR code, printable table card, app icons and social share image.
+Builds the QR code, printable table card and app icons.
+(The link-preview picture is built by tools/build_share_image.py.)
 
 Run from the project root:
     python tools/build_assets.py
@@ -128,32 +129,9 @@ def make_icons():
         im.resize((size, size), Image.LANCZOS).save(os.path.join(IMG_DIR, name), optimize=True)
 
 
-def make_og():
-    """1200 x 630 share image: wordmark on charcoal + three signature dishes."""
-    W, H = 1200, 630
-    og = ember_glow(Image.new("RGB", (W, H), CHAR), 1.0, 0.40)
-    d = ImageDraw.Draw(og)
-    cx = 330
-    brand(d, cx, 48, 1.0)
-    center_text(d, cx, 478, "Filipino Grill · Indian · Indonesian", poppins(26, "SemiBold"), AMBER)
-    d.rounded_rectangle((cx - 120, 532, cx + 120, 586), radius=27, fill=RED)
-    center_text(d, cx, 539, "View Menu", poppins(28), WHITE)
-    for slug, x, y, size in (("bulalo", 700, 40, 330), ("chicken-inasal", 930, 300, 250), ("kare-kare", 660, 350, 240)):
-        ph = Image.open(os.path.join(IMG_DIR, "menu", f"{slug}-720.webp")).convert("RGB")
-        c = int(ph.width * 0.78)
-        ph = ph.crop(((ph.width - c) // 2, (ph.height - c) // 2, (ph.width + c) // 2, (ph.height + c) // 2)).resize((size, size), Image.LANCZOS)
-        mask = Image.new("L", (size * 4, size * 4), 0)
-        ImageDraw.Draw(mask).ellipse((0, 0, size * 4 - 1, size * 4 - 1), fill=255)
-        mask = mask.resize((size, size), Image.LANCZOS)
-        d.ellipse((x - 8, y - 8, x + size + 8, y + size + 8), fill=WHITE)
-        og.paste(ph, (x, y), mask)
-    og.save(os.path.join(IMG_DIR, "og.jpg"), quality=84, optimize=True, progressive=True)
-
-
 if __name__ == "__main__":
     qr_img = make_qr()
     make_card(qr_img)
     make_icons()
-    make_og()
     print("QR ->", URL)
     print("done")
