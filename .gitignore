@@ -1,0 +1,15 @@
+# Full-size source photos (optimized copies live in assets/img/menu)
+Menu Item IMage/
+
+# Original 1080p intro videos (the optimized hero clip lives in assets/video)
+*_1080p.mp4
+
+# OS / editor
+Thumbs.db
+.DS_Store
+__pycache__/
+.claude/
+tools/_qr_poster_build.html
+tools/_menu_card_build.html
+tools/_menu_card_build_*.html
+*.stackdump
