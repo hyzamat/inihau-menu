@@ -22,6 +22,8 @@ window.MENU = {
     name: "Eastern Special Inihaw",
     address: "Villagio Mall - Gate #7 - First Floor",
     phone: "0535627615",
+    whatsapp: "966535627615",             // international format, no + or spaces (wa.me link)
+    orderTypes: ["Pickup", "Delivery", "Dine-in"],
     currency: "SR"
   },
 

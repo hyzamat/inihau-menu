@@ -14,6 +14,7 @@ Plain HTML/CSS/JS (no frameworks, no build step needed to deploy), ~15 KB of gzi
 | `assets/img/menu/` | Optimized photos, 3 sizes each (360/540/720 px WebP). Combo pictures are collages of the exact dishes in each combo. |
 | `assets/img/wordmark.svg` | The EASTERN SPECIAL Inihaw wordmark as vector paths (also inlined in `index.html`) |
 | `qr/` | QR code (PNG + SVG), **A5 poster** (PDF + PNG), simple A6 table card, and a download page served at `/qr/` |
+| `qr/eastern-special-inihaw-visiting-card.pdf` | **Visiting card** 90 × 50 mm, front + back, 3 mm bleed (+ PNG images of each side) |
 | `qr/menucard/` | **Printable menu card** in **A3, A4 and A5** (PDF + page previews), served at `/qr/menucard/` |
 | `sw.js` | Service worker: instant repeat visits, works on weak signal |
 | `CNAME`, `.nojekyll` | GitHub Pages custom domain settings |
@@ -35,6 +36,15 @@ The QR code points to `https://inihaumenu.hizarc.com/` and will work as soon as 
 - Menu: **https://inihaumenu.hizarc.com/**
 - QR code & poster: **https://inihaumenu.hizarc.com/qr/**
 - Printable menu cards (A3, A4, A5): **https://inihaumenu.hizarc.com/qr/menucard/**
+
+## WhatsApp ordering
+
+Every dish has a green **+** button; the floating WhatsApp button shows the order. **Send order on WhatsApp**
+opens WhatsApp to `+966 53 562 7615` with the items, total, order type (Pickup / Delivery / Dine-in), name,
+address and note already typed. Change the number or the order types in `assets/js/menu-data.js`
+(`restaurant.whatsapp`, `restaurant.orderTypes`).
+
+Link for social media posts that opens the order screen directly: `https://inihaumenu.hizarc.com/#order`
 
 ## Changing the menu
 
@@ -63,4 +73,5 @@ python tools/build_wordmark.py    # EASTERN SPECIAL Inihaw wordmark -> assets/im
 python tools/build_assets.py      # QR code, table card, icons, share image
 python tools/build_qr_poster.py   # A5 poster PDF/PNG + scan check (needs Chrome; fonts in tools/fonts, SIL OFL)
 python tools/build_menu_card.py   # menu card PDFs (A3, A4, A5) + previews + /qr/menucard/ page (needs Chrome + Node)
+python tools/build_visiting_card.py   # visiting card PDF + PNGs (needs Chrome)
 ```
