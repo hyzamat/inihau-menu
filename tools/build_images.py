@@ -31,10 +31,9 @@ SOURCES = {
     "kare-kare": "Filipino_kare-kare_in_clay_pot_9d5a3c22_2K.jpg",
     "overload-lomi": "Bowl_of_Filipino_lomi_noodles_bfed6739.jpg",
     "tomyum": "Thai_hot_pot_with_rice_73ee4e81.jpg",
-    "crispy-pata": "Fried_beef_shank_on_platter_6e5b173a.jpg",
+    "crispy-pata": "Braised_beef_shank_on_platter_a51fb1c7.jpg",
     "patatin": "Braised_beef_shank_on_platter_0a76d8ad.jpg",
     "butter-fish-mango": "Pan-fried_butterfish_with_mango_…_7c19317d.jpg",
-    "budget-meal": "budget-meal.jpg",
     "dinuguan": "Filipino_beef_dinuguan_stew_bowl_ca09b5a5.jpg",
     "chicken-inasal": "Grilled_chicken_inasal_on_plate_c1853d90.jpg",
     "beef-ribs": "BBQ_ribs_with_rice_0eb01e44.jpg",
@@ -136,7 +135,7 @@ SOURCES = {
     "chicharon-bulaklak": "Fried_beef_chicharon_on_platter_8404322c.jpg",
     "lumpia-shanghai": "Spring_rolls_on_white_plate_e04ffd97.jpg",
     "calamares": "Fried_squid_rings_on_plate_c4fb5109.jpg",
-    "beef-lechon-kawali": "Fried_beef_belly_with_salsa_79cf275d.jpg",
+    "beef-lechon-kawali": "Crispy_beef_brisket_with_salsa_f03c5c7b.jpg",
     # Drinks & Desserts
     "mojito": "Three_mojito_mocktails_on_table_8058d0ef.jpg",
     "bubble-tea": "Milk_tea_with_tapioca_pearls_82f57d49.jpg",
@@ -147,31 +146,31 @@ SOURCES = {
     "halo-halo": "Halo-halo_dessert_in_glass_13de0e8b.jpg",
     "buko-pandan": "Buko_pandan_dessert_bowl_14b5eabb.jpg",
     "macaroni-salad": "Filipino_macaroni_salad_in_bowl_00e37707.jpg",
-    # Indian Food (free-licensed photos, see Menu Item IMage/credits.json)
-    "chicken-tikka": "chicken-tikka.jpg",
-    "chicken-curry-indian": "chicken-curry-indian.jpg",
-    "beef-masala": "beef-masala.jpg",
-    "chicken-65": "chicken-65.jpg",
-    "butter-chicken": "butter-chicken.jpg",
-    "chicken-manchurian": "chicken-manchurian.jpg",
-    "gobi-manchurian": "gobi-manchurian.jpg",
-    "parotta": "parotta.jpg",
-    "beef-biryani": "beef-biryani.jpg",
-    "masala-dosa": "masala-dosa.jpg",
-    "chicken-biryani": "chicken-biryani.jpg",
-    "chicken-kadai": "chicken-kadai.jpg",
-    "chilli-chicken": "chilli-chicken.jpg",
+    # Indian Food
+    "chicken-tikka": "Chicken_tikka_on_sizzler_plate_c3c266f2.jpg",
+    "chicken-curry-indian": "Chicken_curry_in_ceramic_bowl_805854e3.jpg",
+    "beef-masala": "Beef_masala_in_bowl_17278edf.jpg",
+    "chicken-65": "Chicken_65_on_white_plate_93debf64.jpg",
+    "butter-chicken": "Butter_chicken_in_copper_handi_b443016d.jpg",
+    "chicken-manchurian": "Chicken_Manchurian_in_bowl_8b638ff4.jpg",
+    "gobi-manchurian": "Gobi_Manchurian_on_white_plate_a2c8ae63.jpg",
+    "parotta": "Kerala_porotta_on_plate_550088f4.jpg",
+    "beef-biryani": "Beef_biryani_on_white_plate_d8a2212b.jpg",
+    "masala-dosa": "Masala_dosa_on_stainless_plate_990ee884.jpg",
+    "chicken-biryani": "Chicken_dum_biryani_in_pot_2da1ece6.jpg",
+    "chicken-kadai": "Chicken_kadai_in_iron_pan_eaea017b.jpg",
+    "chilli-chicken": "Chilli_chicken_on_plate_07f8df48.jpg",
     # Indonesian Special
-    "bakso": "bakso.jpg",
-    "soto-ayam": "soto-ayam.jpg",
-    "sate-ayam": "sate-ayam.jpg",
-    "gado-gado": "gado-gado.jpg",
-    "nasi-bakar-ayam": "nasi-bakar-ayam.jpg",
-    "mie-ayam": "mie-ayam.jpg",
-    "ayam-geprek": "ayam-geprek.jpg",
-    "broasted-chicken": "broasted-chicken.jpg",
+    "bakso": "Indonesian_bakso_with_rice_and_5ddfa35d.jpg",
+    "soto-ayam": "Soto_ayam_with_rice_and_52070161.jpg",
+    "sate-ayam": "Chicken_sate_with_peanut_sauce_41369f2d.jpg",
+    "gado-gado": "Indonesian_gado-gado_dish_served_f3f9ffcd.jpg",
+    "nasi-bakar-ayam": "Indonesian_nasi_bakar_ayam_plate_c6e06d6d.jpg",
+    "mie-ayam": "Bowl_of_Indonesian_mie_ayam_e68bd42c.jpg",
+    "ayam-geprek": "Indonesian_ayam_geprek_restauran…_45888cd8.jpg",
+    "broasted-chicken": "Broasted_chicken_with_French_fries_513d31c7.jpg",
     # only used inside the combo collages
-    "lechon-manok": "lechon-manok.jpg",
+    "lechon-manok": "Filipino_roast_chicken_on_platter_1dc5db49.jpg",
 }
 
 # combo slug -> rows of dish slugs (4:3 collage; each row is split evenly)
@@ -182,11 +181,22 @@ COLLAGES = {
 }
 GUTTER = 0.008  # white line between collage tiles (fraction of width)
 
+# Optional framing per slug: (centre x, centre y) as fractions of the photo, and the square's side
+# as a fraction of the photo's shorter side. Default = centred square of the full shorter side.
+CROPS = {}
 
-def load_square(name):
+# Square collages for menu items without their own photo yet (example meal)
+SQUARE_COLLAGES = {
+    "budget-meal": [["chicken-adobo", "chopsuey"], ["chicken-tinola"]],
+}
+
+
+def load_square(name, slug=None):
     im = ImageOps.exif_transpose(Image.open(os.path.join(SRC_DIR, name))).convert("RGB")
-    s = min(im.size)
-    left, top = (im.width - s) // 2, (im.height - s) // 2
+    cx, cy, f = CROPS.get(slug, (0.5, 0.5, 1.0))
+    s = round(min(im.size) * f)
+    left = min(max(0, round(im.width * cx - s / 2)), im.width - s)
+    top = min(max(0, round(im.height * cy - s / 2)), im.height - s)
     return im.crop((left, top, left + s, top + s))
 
 
@@ -207,7 +217,7 @@ def collage(rows, W=1440, H=1080):
         cw = (W - g * (len(row) - 1)) / len(row)
         for ci, slug in enumerate(row):
             x0, x1 = round(ci * (cw + g)), round(ci * (cw + g) + cw)
-            out.paste(cover(load_square(SOURCES[slug]), x1 - x0, y1 - y0), (x0, y0))
+            out.paste(cover(load_square(SOURCES[slug], slug), x1 - x0, y1 - y0), (x0, y0))
     return out
 
 
@@ -224,7 +234,16 @@ def main():
     for slug, name in SOURCES.items():
         if slug == "lechon-manok" or (only and slug not in only):
             continue
-        im = load_square(name)
+        im = load_square(name, slug)
+        for w in WIDTHS:
+            out = os.path.join(OUT_DIR, f"{slug}-{w}.webp")
+            im.resize((w, w), Image.LANCZOS).save(out, "WEBP", quality=QUALITY, method=6)
+            total += os.path.getsize(out)
+        n += 1
+    for slug, rows in SQUARE_COLLAGES.items():
+        if only and slug not in only:
+            continue
+        im = collage(rows, 1440, 1440)
         for w in WIDTHS:
             out = os.path.join(OUT_DIR, f"{slug}-{w}.webp")
             im.resize((w, w), Image.LANCZOS).save(out, "WEBP", quality=QUALITY, method=6)

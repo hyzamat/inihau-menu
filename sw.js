@@ -1,7 +1,7 @@
 /* Eastern Special Inihaw service worker — makes repeat visits instant and works on weak signal.
    Pages/scripts: network first (fresh prices), cached copy if offline.
    Images: cache first. Bump VERSION whenever you replace an image with the same name. */
-var VERSION = "ei-v2";
+var VERSION = "ei-v3";
 var CORE = ["./", "index.html", "assets/css/style.css", "assets/js/menu-data.js", "assets/js/app.js", "assets/img/icon-192.png"];
 
 self.addEventListener("install", function (e) {

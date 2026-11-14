@@ -51,8 +51,8 @@ are listed as their beef/chicken versions, with matching non-pork photos.
 
 ## Photos
 
-Photos for the Indian and Indonesian sections (and a few others) are free-licensed; their sources,
-authors and licenses are listed in `tools/photo-credits.json` and on `/credits.html`.
+All dish photos share the same top-view terrazzo style. Budget Meal has no photo of its own yet:
+it shows an example-meal collage (see `SQUARE_COLLAGES` in `tools/build_images.py`) until one is added.
 
 ## Rebuilding assets
 

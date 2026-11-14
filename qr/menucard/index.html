@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eastern Special Inihaw — Menu Card</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#16100C">
+<link rel="icon" href="../../assets/img/icon-192.png" type="image/png">
+<style>
+  :root { --gold:#FF8A1F; --gold-lt:#FDE6CC; --green:#3BBF55; --brown:#1E1611; --red:#E8262B; --cream:#F7F1EA; --muted:#7A6656; --line:#EAE0D4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--brown); background: var(--cream); }
+  header { background: radial-gradient(70% 60% at 50% 110%, rgba(255,110,20,.35), transparent 70%), linear-gradient(180deg, #120D0A 0%, #1E1611 55%, #2A1C12 100%); color: #fff; text-align: center; padding: max(26px, env(safe-area-inset-top)) 20px 64px; }
+  .kick { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .18em; color: #FFBF4D; background: rgba(255,138,31,.16); padding: 5px 12px; border-radius: 99px; }
+  h1 .e { color: var(--green); -webkit-text-stroke: 1px #fff; paint-order: stroke fill; }
+  h1 { font: 900 clamp(34px, 11vw, 52px)/.95 "Arial Rounded MT Bold", ui-rounded, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .03em; margin-top: 10px; text-shadow: 0 3px 0 rgba(57,34,20,.18); }
+  header p { margin-top: 8px; font-weight: 600; }
+  main { max-width: 760px; margin: -44px auto 0; padding: 0 14px 40px; }
+  .card { background: #fff; border-radius: 18px; padding: 14px; box-shadow: 0 14px 30px -16px rgba(57,34,20,.5); }
+  .card h2 { margin: 2px 4px 10px; }
+  h2 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 26px 4px 10px; }
+  .list { display: grid; gap: 10px; }
+  .dl { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; background: var(--cream); border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+  .dl:first-child { background: var(--brown); color: #fff; border-color: var(--brown); }
+  .dl:first-child .d { color: #E9DCCB; }
+  .ic { flex: none; width: 50px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-weight: 900; font-size: 12px; background: var(--gold-lt); color: var(--brown); }
+  .dl:first-child .ic { background: var(--red); color: #fff; }
+  .t { font-weight: 800; } .d { font-size: 13px; color: var(--muted); } .ar { margin-left: auto; font-size: 20px; opacity: .6; }
+  .links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .btn { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; }
+  .btn.dark { background: var(--brown); color: #fff; }
+  .btn.ghost { background: #fff; color: var(--brown); border: 1.5px solid var(--line); }
+  .btn.red { background: var(--red); color: #fff; }
+  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tabs > input { position: absolute; opacity: 0; pointer-events: none; }
+  .tabs > label { text-align: center; padding: 10px 6px; border-radius: 12px; background: #fff; border: 1.5px solid var(--line); font-weight: 800; cursor: pointer; line-height: 1.2; }
+  .tabs > label small { display: block; font-size: 11.5px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+  .tabs > input:checked + label { background: var(--brown); color: #fff; border-color: var(--brown); }
+  .tabs > input:checked + label small { color: #E9DCCB; }
+  .tabs > input:focus-visible + label { outline: 3px solid var(--gold); }
+  .panels { grid-column: 1 / -1; margin-top: 8px; }
+  .panel { display: none; gap: 16px; }
+  #t-A3:checked ~ .panels #p-A3 { display: grid; }
+  #t-A4:checked ~ .panels #p-A4 { display: grid; }
+  #t-A5:checked ~ .panels #p-A5 { display: grid; }
+  .bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .panel img { display: block; width: 100%; height: auto; border-radius: 6px; background: #EFE8DA; box-shadow: 0 10px 24px -14px rgba(57,34,20,.6); }
+  footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 0 20px 30px; }
+</style>
+</head>
+<body>
+<header>
+  <span class="kick">PRINTABLE MENU CARD</span>
+  <h1><span class="e">Eastern</span> Special Inihaw</h1>
+  <p>Every dish with photo &amp; price · choose your paper size</p>
+</header>
+<main>
+  <div class="card">
+    <h2>Download</h2>
+    <div class="list"><a class="dl" href="eastern-special-inihaw-menu-card-A3.pdf" download><span class="ic">A3</span><span><span class="t">A3</span><br><span class="d">297 × 420 mm · 12 pages · PDF 10.8 MB</span></span><span class="ar">↓</span></a><a class="dl" href="eastern-special-inihaw-menu-card-A4.pdf" download><span class="ic">A4</span><span><span class="t">A4</span><br><span class="d">210 × 297 mm · 12 pages · PDF 7.0 MB</span></span><span class="ar">↓</span></a><a class="dl" href="eastern-special-inihaw-menu-card-A5.pdf" download><span class="ic">A5</span><span><span class="t">A5</span><br><span class="d">148 × 210 mm · 24 pages · PDF 6.0 MB</span></span><span class="ar">↓</span></a></div>
+    <div class="links"><a class="btn red" href="../../">Digital menu →</a><a class="btn ghost" href="../">QR code &amp; poster</a></div>
+  </div>
+  <h2>Preview</h2>
+  <div class="tabs"><input type="radio" name="fmt" id="t-A3"><label for="t-A3">A3<small>297 × 420 mm</small></label><input type="radio" name="fmt" id="t-A4" checked><label for="t-A4">A4<small>210 × 297 mm</small></label><input type="radio" name="fmt" id="t-A5"><label for="t-A5">A5<small>148 × 210 mm</small></label>
+    <div class="panels">
+    <div class="panel" id="p-A3"><div class="bar"><a class="btn dark" href="eastern-special-inihaw-menu-card-A3.pdf" download>⬇ Download A3 PDF</a><a class="btn ghost" href="eastern-special-inihaw-menu-card-A3.pdf" target="_blank" rel="noopener">Open / Print</a></div>
+      <img src="a3/page-01.webp" width="1000" height="1414" alt="A3 page 1" loading="lazy" decoding="async">
+      <img src="a3/page-02.webp" width="1000" height="1414" alt="A3 page 2" loading="lazy" decoding="async">
+      <img src="a3/page-03.webp" width="1000" height="1414" alt="A3 page 3" loading="lazy" decoding="async">
+      <img src="a3/page-04.webp" width="1000" height="1414" alt="A3 page 4" loading="lazy" decoding="async">
+      <img src="a3/page-05.webp" width="1000" height="1414" alt="A3 page 5" loading="lazy" decoding="async">
+      <img src="a3/page-06.webp" width="1000" height="1414" alt="A3 page 6" loading="lazy" decoding="async">
+      <img src="a3/page-07.webp" width="1000" height="1414" alt="A3 page 7" loading="lazy" decoding="async">
+      <img src="a3/page-08.webp" width="1000" height="1414" alt="A3 page 8" loading="lazy" decoding="async">
+      <img src="a3/page-09.webp" width="1000" height="1414" alt="A3 page 9" loading="lazy" decoding="async">
+      <img src="a3/page-10.webp" width="1000" height="1414" alt="A3 page 10" loading="lazy" decoding="async">
+      <img src="a3/page-11.webp" width="1000" height="1414" alt="A3 page 11" loading="lazy" decoding="async">
+      <img src="a3/page-12.webp" width="1000" height="1414" alt="A3 page 12" loading="lazy" decoding="async">
+    </div>
+    <div class="panel" id="p-A4"><div class="bar"><a class="btn dark" href="eastern-special-inihaw-menu-card-A4.pdf" download>⬇ Download A4 PDF</a><a class="btn ghost" href="eastern-special-inihaw-menu-card-A4.pdf" target="_blank" rel="noopener">Open / Print</a></div>
+      <img src="a4/page-01.webp" width="1000" height="1414" alt="A4 page 1" decoding="async">
+      <img src="a4/page-02.webp" width="1000" height="1414" alt="A4 page 2" loading="lazy" decoding="async">
+      <img src="a4/page-03.webp" width="1000" height="1414" alt="A4 page 3" loading="lazy" decoding="async">
+      <img src="a4/page-04.webp" width="1000" height="1414" alt="A4 page 4" loading="lazy" decoding="async">
+      <img src="a4/page-05.webp" width="1000" height="1414" alt="A4 page 5" loading="lazy" decoding="async">
+      <img src="a4/page-06.webp" width="1000" height="1414" alt="A4 page 6" loading="lazy" decoding="async">
+      <img src="a4/page-07.webp" width="1000" height="1414" alt="A4 page 7" loading="lazy" decoding="async">
+      <img src="a4/page-08.webp" width="1000" height="1414" alt="A4 page 8" loading="lazy" decoding="async">
+      <img src="a4/page-09.webp" width="1000" height="1414" alt="A4 page 9" loading="lazy" decoding="async">
+      <img src="a4/page-10.webp" width="1000" height="1414" alt="A4 page 10" loading="lazy" decoding="async">
+      <img src="a4/page-11.webp" width="1000" height="1414" alt="A4 page 11" loading="lazy" decoding="async">
+      <img src="a4/page-12.webp" width="1000" height="1414" alt="A4 page 12" loading="lazy" decoding="async">
+    </div>
+    <div class="panel" id="p-A5"><div class="bar"><a class="btn dark" href="eastern-special-inihaw-menu-card-A5.pdf" download>⬇ Download A5 PDF</a><a class="btn ghost" href="eastern-special-inihaw-menu-card-A5.pdf" target="_blank" rel="noopener">Open / Print</a></div>
+      <img src="a5/page-01.webp" width="1000" height="1419" alt="A5 page 1" loading="lazy" decoding="async">
+      <img src="a5/page-02.webp" width="1000" height="1419" alt="A5 page 2" loading="lazy" decoding="async">
+      <img src="a5/page-03.webp" width="1000" height="1419" alt="A5 page 3" loading="lazy" decoding="async">
+      <img src="a5/page-04.webp" width="1000" height="1419" alt="A5 page 4" loading="lazy" decoding="async">
+      <img src="a5/page-05.webp" width="1000" height="1419" alt="A5 page 5" loading="lazy" decoding="async">
+      <img src="a5/page-06.webp" width="1000" height="1419" alt="A5 page 6" loading="lazy" decoding="async">
+      <img src="a5/page-07.webp" width="1000" height="1419" alt="A5 page 7" loading="lazy" decoding="async">
+      <img src="a5/page-08.webp" width="1000" height="1419" alt="A5 page 8" loading="lazy" decoding="async">
+      <img src="a5/page-09.webp" width="1000" height="1419" alt="A5 page 9" loading="lazy" decoding="async">
+      <img src="a5/page-10.webp" width="1000" height="1419" alt="A5 page 10" loading="lazy" decoding="async">
+      <img src="a5/page-11.webp" width="1000" height="1419" alt="A5 page 11" loading="lazy" decoding="async">
+      <img src="a5/page-12.webp" width="1000" height="1419" alt="A5 page 12" loading="lazy" decoding="async">
+      <img src="a5/page-13.webp" width="1000" height="1419" alt="A5 page 13" loading="lazy" decoding="async">
+      <img src="a5/page-14.webp" width="1000" height="1419" alt="A5 page 14" loading="lazy" decoding="async">
+      <img src="a5/page-15.webp" width="1000" height="1419" alt="A5 page 15" loading="lazy" decoding="async">
+      <img src="a5/page-16.webp" width="1000" height="1419" alt="A5 page 16" loading="lazy" decoding="async">
+      <img src="a5/page-17.webp" width="1000" height="1419" alt="A5 page 17" loading="lazy" decoding="async">
+      <img src="a5/page-18.webp" width="1000" height="1419" alt="A5 page 18" loading="lazy" decoding="async">
+      <img src="a5/page-19.webp" width="1000" height="1419" alt="A5 page 19" loading="lazy" decoding="async">
+      <img src="a5/page-20.webp" width="1000" height="1419" alt="A5 page 20" loading="lazy" decoding="async">
+      <img src="a5/page-21.webp" width="1000" height="1419" alt="A5 page 21" loading="lazy" decoding="async">
+      <img src="a5/page-22.webp" width="1000" height="1419" alt="A5 page 22" loading="lazy" decoding="async">
+      <img src="a5/page-23.webp" width="1000" height="1419" alt="A5 page 23" loading="lazy" decoding="async">
+      <img src="a5/page-24.webp" width="1000" height="1419" alt="A5 page 24" loading="lazy" decoding="async">
+    </div>
+    </div>
+  </div>
+</main>
+<footer>Print at 100% / "Actual size" on the matching paper size. Prices in Saudi Riyal (SR).</footer>
+</body>
+</html>
