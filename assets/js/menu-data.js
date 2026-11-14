@@ -25,7 +25,9 @@ window.MENU = {
     // WhatsApp number that receives orders: country code + number, digits only (0535627615 -> 966535627615)
     whatsapp: "966535627615",
     // Order types the customer can pick in the WhatsApp order popup
-    orderTypes: ["Dine-in", "Pickup", "Delivery"],
+    orderTypes: ["Pickup", "Delivery"],
+    // Order type that is already selected when the order popup opens
+    defaultOrderType: "Delivery",
     // Home delivery (used when the customer picks "Delivery")
     delivery: {
       fee: 30,        // delivery charge in SR.  null = "confirmed on WhatsApp",  0 = free delivery

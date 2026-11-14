@@ -15,6 +15,7 @@ Plain HTML/CSS/JS (no frameworks, no build step needed to deploy), ~15 KB of gzi
 | `assets/img/wordmark.svg` | The EASTERN SPECIAL Inihaw wordmark as vector paths (also inlined in `index.html`) |
 | `qr/` | QR code (PNG + SVG), **A5 poster** (PDF + PNG), simple A6 table card, and a download page served at `/qr/` |
 | `qr/eastern-special-inihaw-visiting-card.pdf` | **Visiting card** 90 × 50 mm, front + back, 3 mm bleed (+ PNG images of each side) |
+| `qr/order-now/` | **ORDER NOW poster** (A4, A5 PDF + PNG): scan, add dishes, send on WhatsApp |
 | `qr/menucard/` | **Printable menu card** in **A3, A4 and A5** (PDF + page previews), served at `/qr/menucard/` |
 | `sw.js` | Service worker: instant repeat visits, works on weak signal |
 | `CNAME`, `.nojekyll` | GitHub Pages custom domain settings |
@@ -36,19 +37,21 @@ The QR code points to `https://inihaumenu.hizarc.com/` and will work as soon as 
 - Menu: **https://inihaumenu.hizarc.com/**
 - QR code & poster: **https://inihaumenu.hizarc.com/qr/**
 - Printable menu cards (A3, A4, A5): **https://inihaumenu.hizarc.com/qr/menucard/**
+- ORDER NOW poster (A4): **https://inihaumenu.hizarc.com/qr/order-now/eastern-special-inihaw-order-now-A4.pdf**
 
 ## WhatsApp ordering
 
-Every dish sheet has quantity, size and **Add to order**; the floating
-WhatsApp button shows the item count and total. The order popup has the basket, an **Add to your order** row
-(`extras` in `menu-data.js`), order type (Dine-in / Pickup / Delivery), table number, delivery address,
+Guests tap the red **+** on a dish photo (or **Add to order** inside a dish for size + quantity), then the green
+**View order** button. With an empty order that button shows the 3 steps and **Start ordering**, which scrolls to
+the dishes and points at the **+** buttons. The order popup has the basket, an **Add to your order** row
+(`extras` in `menu-data.js`), order type (Pickup / Delivery, Delivery pre-selected), delivery address,
 **Share my location**, name and a kitchen note. **Send order on WhatsApp** opens WhatsApp to `+966 53 562 7615`
 with the whole order typed out.
 
 - Delivery charge: **30 SR** (`restaurant.delivery.fee`; `0` = free, `null` = confirmed on WhatsApp),
   optional minimum order (`restaurant.delivery.minOrder`).
-- Links: `/#order` opens the order popup, `/?order=delivery#order` pre-selects Delivery,
-  `/?table=5` pre-fills Dine-in table 5 (for table QR codes).
+- Order types and the pre-selected one: `restaurant.orderTypes`, `restaurant.defaultOrderType`.
+- Links: `/#order` opens the order popup, `/?order=pickup#order` pre-selects Pickup.
 
 ## Changing the menu
 
@@ -78,4 +81,5 @@ python tools/build_assets.py      # QR code, table card, icons, share image
 python tools/build_qr_poster.py   # A5 poster PDF/PNG + scan check (needs Chrome; fonts in tools/fonts, SIL OFL)
 python tools/build_menu_card.py   # menu card PDFs (A3, A4, A5) + previews + /qr/menucard/ page (needs Chrome + Node)
 python tools/build_visiting_card.py   # visiting card PDF + PNGs (needs Chrome)
+python tools/build_order_poster.py    # ORDER NOW poster, A4 + A5 PDF + PNG (needs Chrome + Node)
 ```
