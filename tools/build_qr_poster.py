@@ -228,7 +228,7 @@ def main():
     if not browser:
         sys.exit("Microsoft Edge or Google Chrome is required to print the PDF.")
     tmp = os.path.join(TOOLS, "_qr_poster_build.html")
-    profile = os.path.join(tempfile.gettempdir(), "bh-qr-poster-profile")
+    profile = os.path.join(tempfile.gettempdir(), "ei-qr-poster-profile")
     if os.path.exists(OUT_PDF):
         os.remove(OUT_PDF)
     open(tmp, "w", encoding="utf-8").write(html())

@@ -22,6 +22,7 @@
 <script defer src="assets/js/app.js"></script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></symbol></svg>
 
 <header class="hero">
   <div class="hero__inner">
@@ -37,8 +38,8 @@
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
         053 562 7615
       </a>
-      <a class="btn-wa" href="#order" data-open-order>
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.7 8.24-8.22 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+      <a class="btn-wa" href="https://wa.me/966535627615" data-wa-open>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-wa"/></svg>
         Order on WhatsApp
       </a>
     </div>
@@ -69,7 +70,7 @@
 <footer class="foot">
   <p class="foot__name"><span>Eastern</span> Special Inihaw</p>
   <p>Villagio Mall · Gate #7 · First Floor</p>
-  <p><a href="tel:0535627615">Mob. 053 562 7615</a> · <a href="https://wa.me/966535627615" target="_blank" rel="noopener">WhatsApp</a></p>
+  <p><a href="tel:0535627615">Mob. 053 562 7615</a> · <a href="https://wa.me/966535627615" data-wa-open>WhatsApp orders</a></p>
   <p class="foot__note">All prices in Saudi Riyal (SR). Calories as listed on our printed menu. Photos are for illustration. We do not serve pork.</p>
 </footer>
 
@@ -83,13 +84,27 @@
   </div>
 </dialog>
 
-<button class="wa-fab" id="waFab" type="button" aria-label="Order on WhatsApp"><span class="wa-fab__n" id="waCount" hidden>0</span></button>
-<div class="wa-hint" id="waHint" role="dialog" aria-label="Order on WhatsApp" hidden>
-  <button class="wa-hint__x" type="button" aria-label="Close">×</button>
-  <b>Order on WhatsApp</b>
-  <span>Tap <i>+</i> on any dish, then send your order to us in one tap.</span>
+<button class="wa-fab" id="waFab" type="button" data-wa-open aria-label="Order on WhatsApp">
+  <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-wa"/></svg>
+  <span class="wa-fab__txt" id="waFabTxt"></span>
+</button>
+<div class="wa-tip" id="waTip" role="status" hidden>
+  <button class="wa-tip__x" id="waTipX" type="button" aria-label="Close">&times;</button>
+  <p id="waTipTxt"></p>
 </div>
-<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog class="sheet wa" id="wa" aria-labelledby="waTitle">
+  <div class="sheet__panel wa__panel" id="waPanel">
+    <div class="wa__head">
+      <img src="assets/img/icon-192.png" width="42" height="42" alt="">
+      <div><h2 id="waTitle">Eastern Special Inihaw</h2><p>Order on WhatsApp</p></div>
+      <button class="wa__x" id="waClose" type="button" aria-label="Close">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg>
+      </button>
+    </div>
+    <div class="wa__body" id="waBody"></div>
+  </div>
+</dialog>
 
 </body>
 </html>

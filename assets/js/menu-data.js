@@ -22,10 +22,36 @@ window.MENU = {
     name: "Eastern Special Inihaw",
     address: "Villagio Mall - Gate #7 - First Floor",
     phone: "0535627615",
-    whatsapp: "966535627615",             // international format, no + or spaces (wa.me link)
-    orderTypes: ["Pickup", "Delivery", "Dine-in"],
+    // WhatsApp number that receives orders: country code + number, digits only (0535627615 -> 966535627615)
+    whatsapp: "966535627615",
+    // Order types the customer can pick in the WhatsApp order popup
+    orderTypes: ["Dine-in", "Pickup", "Delivery"],
+    // Home delivery (used when the customer picks "Delivery")
+    delivery: {
+      fee: 30,        // delivery charge in SR.  null = "confirmed on WhatsApp",  0 = free delivery
+      minOrder: 0,    // minimum order for delivery in SR (0 = no minimum)
+      note: ""        // optional line shown to the customer, e.g. "We deliver inside Villagio compound only"
+    },
     currency: "SR"
   },
+
+  // Add-ons shown in the order popup under "Add to your order".
+  //   { id: "x-water", name: "Water", price: 2, icon: "💧" }   an extra that is not on the menu
+  //   { ref: "iced-tea" }                                       a dish/drink already on the menu (its name, price and photo are reused)
+  // An extra with price: null stays hidden until you type its price.
+  extras: [
+    { id: "x-water", name: "Water", price: null, icon: "💧" },
+    { id: "x-pepsi", name: "Pepsi", price: null, icon: "🥤" },
+    { id: "x-fries", name: "French Fries", price: null, icon: "🍟" },
+    { id: "x-rice", name: "Plain Rice", price: null, icon: "🍚" },
+    { ref: "parotta" },
+    { ref: "butter-garlic-rice" },
+    { ref: "iced-tea" },
+    { ref: "pineapple-juice" },
+    { ref: "buko-pandan" },
+    { ref: "macaroni-salad" },
+    { ref: "halo-halo" }
+  ],
 
   combos: [
     { id: "combo-1", name: "Family Combo #1", serves: "3–4 persons", price: 210, cal: 2400, img: "combo-1",

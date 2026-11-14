@@ -39,12 +39,16 @@ The QR code points to `https://inihaumenu.hizarc.com/` and will work as soon as 
 
 ## WhatsApp ordering
 
-Every dish has a green **+** button; the floating WhatsApp button shows the order. **Send order on WhatsApp**
-opens WhatsApp to `+966 53 562 7615` with the items, total, order type (Pickup / Delivery / Dine-in), name,
-address and note already typed. Change the number or the order types in `assets/js/menu-data.js`
-(`restaurant.whatsapp`, `restaurant.orderTypes`).
+Every dish sheet has quantity, size and **Add to order**; the floating
+WhatsApp button shows the item count and total. The order popup has the basket, an **Add to your order** row
+(`extras` in `menu-data.js`), order type (Dine-in / Pickup / Delivery), table number, delivery address,
+**Share my location**, name and a kitchen note. **Send order on WhatsApp** opens WhatsApp to `+966 53 562 7615`
+with the whole order typed out.
 
-Link for social media posts that opens the order screen directly: `https://inihaumenu.hizarc.com/#order`
+- Delivery charge: **30 SR** (`restaurant.delivery.fee`; `0` = free, `null` = confirmed on WhatsApp),
+  optional minimum order (`restaurant.delivery.minOrder`).
+- Links: `/#order` opens the order popup, `/?order=delivery#order` pre-selects Delivery,
+  `/?table=5` pre-fills Dine-in table 5 (for table QR codes).
 
 ## Changing the menu
 
