@@ -30,7 +30,15 @@ window.MENU = {
     defaultOrderType: "Delivery",
     // Home delivery (used when the customer picks "Delivery")
     delivery: {
-      fee: 30,        // delivery charge in SR.  null = "confirmed on WhatsApp",  0 = free delivery
+      // Delivery charge by distance: the customer picks one in the order popup (required for delivery).
+      // Remove "zones" to go back to one fixed charge (fee below).
+      zones: [
+        { label: "Up to 3 km", fee: 10 },
+        { label: "Up to 5 km", fee: 15 },
+        { label: "Up to 10 km", fee: 20 },
+        { label: "Above 10 km", fee: 30 }
+      ],
+      fee: 30,        // fixed delivery charge in SR, used only when there are no zones. null = "confirmed on WhatsApp", 0 = free
       minOrder: 0,    // minimum order for delivery in SR (0 = no minimum)
       note: ""        // optional line shown to the customer, e.g. "We deliver inside Villagio compound only"
     },

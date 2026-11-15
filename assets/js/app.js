@@ -411,14 +411,30 @@
   var fab = $("waFab"), fabTxt = $("waFabTxt"), tip = $("waTip"), tipTimer = 0;
   var cart = [];                                   // [{ id, s: size index or -1, n: quantity }]
   // people = party size for Dine-in; table only comes from a table QR (?table=5); loc = map link from "Share my location"
-  var info = { type: "", name: "", table: "", people: 2, addr: "", note: "", loc: "" };
+  // zone = index into delivery.zones (distance band), -1 = not chosen yet
+  var info = { type: "", name: "", table: "", people: 2, addr: "", note: "", loc: "", zone: -1 };
   var isDine = function (t) { return /dine/i.test(t); };
   var isDelivery = function (t) { return /deliver/i.test(t); };
   var DLV = R.delivery || {};
   var FEE = typeof DLV.fee === "number" && DLV.fee >= 0 ? DLV.fee : null;      // null -> confirmed on WhatsApp
+  var ZONES = (DLV.zones || []).filter(function (z) { return z && z.label && typeof z.fee === "number"; });
   var MIN = +DLV.minOrder || 0;
   var locMsg = "";
-  function fee() { return isDelivery(info.type) && FEE ? FEE : 0; }
+  function zone() { return ZONES[info.zone] || null; }
+  function fee() {
+    if (!isDelivery(info.type)) return 0;
+    if (ZONES.length) return zone() ? zone().fee : 0;
+    return FEE || 0;
+  }
+  function feeText(forMessage) {               // what the "Delivery" line says
+    if (ZONES.length) {
+      var z = zone();
+      if (!z) return forMessage ? "please confirm" : "choose distance";
+      return z.fee ? z.fee + " " + CUR : "FREE";
+    }
+    return FEE === null ? (forMessage ? "please confirm" : "confirmed on WhatsApp") : FEE ? FEE + " " + CUR : "FREE";
+  }
+  function feeUnknown() { return ZONES.length ? !zone() : FEE === null; }
   function belowMin() { return isDelivery(info.type) && MIN > 0 && totals().sum < MIN; }
   function countOf(id, s) {
     for (var i = 0; i < cart.length; i++) if (cart[i].id === id && cart[i].s === s) return cart[i].n;
@@ -492,9 +508,10 @@
     out.push("");
     if (del) {
       out.push("Subtotal: " + sum + " " + CUR,
-        "Delivery: " + (FEE === null ? "please confirm" : FEE ? FEE + " " + CUR : "FREE"));
+        "Delivery" + (zone() ? " (" + zone().label + ")" : "") + ": " + feeText(true));
     }
-    out.push("*Total: " + (sum + fee()) + " " + CUR + (del && FEE === null ? " + delivery" : "") + "*", "", "*Order type:* " + info.type);
+    out.push("*Total: " + (sum + fee()) + " " + CUR + (del && feeUnknown() ? " + delivery" : "") + "*", "", "*Order type:* " + info.type);
+    if (del && zone()) out.push("*Distance:* " + zone().label);
     if (isDine(info.type)) {
       out.push("*People:* " + info.people);
       if (info.table.trim()) out.push("*Table:* " + info.table.trim());
@@ -543,7 +560,7 @@
     if (del) {
       rows = '<div class="wa__row"><span>Subtotal</span><span>' + sum + " " + CUR + "</span></div>" +
         '<div class="wa__row"><span>Delivery</span><span>' +
-        (FEE === null ? "confirmed on WhatsApp" : FEE ? FEE + " " + CUR : "FREE") + "</span></div>";
+        (zone() ? '<small class="wa__zl">' + esc(zone().label) + "</small> " : "") + feeText(false) + "</span></div>";
     }
     return rows + '<div class="wa__total"><span>Total</span><b>' + (sum + fee()) + " <small>" + CUR + "</small></b></div>" +
       (belowMin() ? '<p class="wa__min" id="waMin">Minimum order for delivery is ' + MIN + " " + CUR +
@@ -611,6 +628,12 @@
       '<button type="button" data-pp="-1" aria-label="One person less">&minus;</button>' +
       '<span id="waPpl" aria-live="polite">' + info.people + "</span>" +
       '<button type="button" data-pp="1" aria-label="One person more">+</button></div></div>' +
+      (ZONES.length ? '<div class="fld zones" data-show="delivery"><span id="waZoneL">Delivery distance</span>' +
+        '<div class="zseg" id="waZone" role="radiogroup" aria-labelledby="waZoneL">' +
+        ZONES.map(function (z, i) {
+          return '<button type="button" role="radio" data-zone="' + i + '" aria-checked="' + (i === info.zone) + '">' +
+            "<b>" + esc(z.label) + "</b><span>" + (z.fee ? z.fee + " " + CUR : "FREE") + "</span></button>";
+        }).join("") + "</div></div>" : "") +
       (DLV.note ? '<p class="dlv__note">' + esc(DLV.note) + "</p>" : "") +
       field("addr", "Delivery address", 'rows="2" autocomplete="street-address" placeholder="Building / villa, street, area"', "delivery") +
       '<div class="loc" id="waLoc">' + locHTML() + "</div>" +
@@ -628,7 +651,7 @@
     var sums = $("waSums");
     if (sums) sums.innerHTML = sumsHTML();         // delivery fee / minimum order depend on the type
   }
-  function saveInfo() { store("ei-info", { name: info.name, type: info.type, addr: info.addr }); }
+  function saveInfo() { store("ei-info", { name: info.name, type: info.type, addr: info.addr, zone: info.zone }); }
 
   function showWa() { renderWa(); waPanel.scrollTop = 0; hideTip(); dlgShow(wa, waPanel); }
   function openWa() {
@@ -690,6 +713,7 @@
     var saved = restore("ei-info") || {};
     info.name = saved.name || "";
     info.addr = saved.addr || "";
+    info.zone = typeof saved.zone === "number" && ZONES[saved.zone] ? saved.zone : -1;
     // every visit starts on the default order type (Delivery); a link with ?order=pickup can override it
     info.type = TYPES.indexOf(R.defaultOrderType) !== -1 ? R.defaultOrderType : "";
     var tm = /[?&]table=([^&#]+)/.exec(location.search);  // table QR codes: ?table=5
@@ -752,6 +776,12 @@
       } else if (b.hasAttribute("data-loc-rm")) {
         info.loc = "";
         $("waLoc").innerHTML = locHTML();
+      } else if (b.hasAttribute("data-zone")) {
+        info.zone = +b.getAttribute("data-zone");
+        $("waZone").classList.remove("err");
+        waBody.querySelectorAll("[data-zone]").forEach(function (x) { x.setAttribute("aria-checked", x === b); });
+        $("waSums").innerHTML = sumsHTML();
+        saveInfo();
       } else if (b.hasAttribute("data-type")) {
         info.type = b.getAttribute("data-type");
         $("waType").classList.remove("err");
@@ -769,6 +799,7 @@
         var bad = null;
         if (!info.type) { bad = $("waType"); bad.classList.add("err"); }
         else if (belowMin()) { bad = $("waMin"); }
+        else if (isDelivery(info.type) && ZONES.length && !zone()) { bad = $("waZone"); bad.classList.add("err"); }
         // delivery needs a typed address or a location pin
         else if (isDelivery(info.type) && !info.addr.trim() && !info.loc) { bad = waBody.querySelector('[data-f="addr"]'); bad.classList.add("err"); bad.focus(); }
         if (bad) { e.preventDefault(); bad.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
