@@ -49,7 +49,7 @@ the dishes and points at the **+** buttons. The order popup has the basket, an *
 with the whole order typed out.
 
 - Delivery charge by distance (`restaurant.delivery.zones`): the customer must pick one before sending.
-  Up to 3 km **10 SR** · up to 5 km **15 SR** · up to 10 km **20 SR** · above 10 km **30 SR**.
+  Within 3 km **10 SR** · within 5 km **15 SR** · within 10 km **20 SR** · above 10 km **30 SR**.
   The chosen distance and charge go into the WhatsApp message. Without `zones`, `restaurant.delivery.fee` is one
   fixed charge (`0` = free, `null` = confirmed on WhatsApp). Optional minimum order: `restaurant.delivery.minOrder`.
 - Order types and the pre-selected one: `restaurant.orderTypes`, `restaurant.defaultOrderType`.
