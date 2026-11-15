@@ -48,10 +48,13 @@ the dishes and points at the **+** buttons. The order popup has the basket, an *
 **Share my location**, name and a kitchen note. **Send order on WhatsApp** opens WhatsApp to `+966 53 562 7615`
 with the whole order typed out.
 
-- Delivery charge by distance (`restaurant.delivery.zones`): the customer must pick one before sending.
+- Delivery charge by distance (`restaurant.delivery.zones`): the customer must pick one before sending
+  (a **Choose one** tag, and a red message if they tap Send without it).
   Within 3 km **10 SR** · within 5 km **15 SR** · within 10 km **20 SR** · above 10 km **30 SR**.
   The chosen distance and charge go into the WhatsApp message. Without `zones`, `restaurant.delivery.fee` is one
   fixed charge (`0` = free, `null` = confirmed on WhatsApp). Optional minimum order: `restaurant.delivery.minOrder`.
+- **Share my location**: if the phone gives no location (weak signal indoors), it tries once more; if location is
+  blocked it tells the customer how to turn it on (iPhone / Android steps) or to type the address instead.
 - Order types and the pre-selected one: `restaurant.orderTypes`, `restaurant.defaultOrderType`.
 - Links: `/#order` opens the order popup, `/?order=pickup#order` pre-selects Pickup.
 

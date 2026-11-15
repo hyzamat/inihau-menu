@@ -532,7 +532,7 @@ h1, h2, h3, p { margin: 0; }
 .loc__btn:disabled { opacity: .7; }
 .loc__ok { font-size: 14px; font-weight: 800; color: var(--wa); }
 .loc__rm { border: 0; background: transparent; cursor: pointer; color: #8696A0; font-size: 13px; font-weight: 700; text-decoration: underline; }
-.loc__msg { flex-basis: 100%; font-size: 12.5px; color: #FF9AA5; }
+.loc__msg { flex-basis: 100%; font-size: 13px; line-height: 1.45; color: #FF9AA5; }
 
 /* order popup: "how to order" (shown while the order is empty) */
 .how { list-style: none; margin: 12px 0 16px; padding: 0; display: grid; gap: 8px; counter-reset: how; }
@@ -573,6 +573,14 @@ h1, h2, h3, p { margin: 0; }
 .zseg.err { animation: shake .4s; }
 .zseg.err button { border-color: #F15C6D; }
 .wa__zl { font-size: 12px; font-weight: 700; color: #8696A0; margin-right: 4px; }
+.req {
+  margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: rgba(255,191,77,.14);
+  color: var(--amber); font-size: 11px; font-style: normal; font-weight: 800; vertical-align: 1px;
+}
+.zones:has([aria-checked="true"]) .req { display: none; }
+.zmsg { display: none; margin-top: 8px; padding: 9px 12px; border-radius: 10px; background: rgba(241,92,109,.12);
+  color: #FF9AA5; font-size: 13px; font-weight: 700; }
+.zseg.err + .zmsg { display: block; }
 
 /* ---------- Larger screens ---------- */
 @media (min-width: 640px) {

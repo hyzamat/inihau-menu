@@ -571,22 +571,54 @@
       return '<span class="loc__ok">&#10003; Location pin added</span>' +
         '<button class="loc__rm" type="button" data-loc-rm>Remove</button>';
     }
-    return '<button class="btn btn--ghost loc__btn" type="button" data-loc>&#128205; Share my location</button>' +
+    return '<button class="btn btn--ghost loc__btn" type="button" data-loc>&#128205; ' + (locMsg ? "Try again" : "Share my location") + "</button>" +
       (locMsg ? '<p class="loc__msg">' + esc(locMsg) + "</p>" : "");
+  }
+  function locHelp(code) {                         // what to tell the customer when the phone gives no location
+    var ua = navigator.userAgent;
+    var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (code === 1) {                              // permission denied
+      if (/FBAN|FBAV|FB_IAB|Instagram|Snapchat|Line\/|TikTok|musical_ly|Twitter/i.test(ua))
+        return "This app's browser can't share your location. Open the menu in " + (ios ? "Safari" : "Chrome") +
+          ", or type your address.";
+      if (ios)
+        return "Location is off for this page. On iPhone open Settings › Privacy & Security › Location Services: " +
+          "turn it on, then Safari Websites › While Using the App. Come back and tap Try again, or type your address.";
+      if (/Android/.test(ua))
+        return "Location is blocked for this page. Tap the icon left of the web address › Permissions › Location › Allow, " +
+          "and turn on Location on your phone. Then tap Try again, or type your address.";
+      return "Location is blocked for this page. Allow location in your browser settings and tap Try again, or type your address.";
+    }
+    return "Couldn't find your location (weak signal indoors?). Make sure Location is on and tap Try again, " +
+      "or type your address. You can also send your location in WhatsApp after the order.";
   }
   function getLoc(btn) {
     function done(msg) { locMsg = msg; var box = $("waLoc"); if (box) box.innerHTML = locHTML(); }
-    if (!navigator.geolocation) { done("Location is not available on this phone. Please type your address."); return; }
+    if (!navigator.geolocation || window.isSecureContext === false) {
+      done("Location is not available here. Please type your address.");
+      return;
+    }
     btn.disabled = true;
     btn.textContent = "Getting your location…";
-    navigator.geolocation.getCurrentPosition(function (p) {
+    var retried = false;
+    function ok(p) {
       info.loc = "https://maps.google.com/?q=" + p.coords.latitude.toFixed(6) + "," + p.coords.longitude.toFixed(6);
       var a = waBody.querySelector('[data-f="addr"]');
       if (a) a.classList.remove("err");
       done("");
-    }, function () {
-      done("Couldn't get your location. Type your address, or send your location in WhatsApp after the order.");
-    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+    }
+    function fail(err) {
+      var code = err && err.code;
+      // weak GPS (e.g. inside a building) or too slow: try once more and accept a rougher or recent position
+      if (code !== 1 && !retried) {
+        retried = true;
+        btn.textContent = "Still looking for you…";
+        navigator.geolocation.getCurrentPosition(ok, fail, { enableHighAccuracy: false, timeout: 20000, maximumAge: 600000 });
+        return;
+      }
+      done(locHelp(code));
+    }
+    navigator.geolocation.getCurrentPosition(ok, fail, { enableHighAccuracy: true, timeout: 15000, maximumAge: 120000 });
   }
   function refresh() {                             // after the basket changes while the popup is open
     $("waLines").innerHTML = linesHTML();
@@ -628,12 +660,12 @@
       '<button type="button" data-pp="-1" aria-label="One person less">&minus;</button>' +
       '<span id="waPpl" aria-live="polite">' + info.people + "</span>" +
       '<button type="button" data-pp="1" aria-label="One person more">+</button></div></div>' +
-      (ZONES.length ? '<div class="fld zones" data-show="delivery"><span id="waZoneL">Delivery distance</span>' +
+      (ZONES.length ? '<div class="fld zones" data-show="delivery"><span id="waZoneL">Delivery distance <em class="req">Choose one</em></span>' +
         '<div class="zseg" id="waZone" role="radiogroup" aria-labelledby="waZoneL">' +
         ZONES.map(function (z, i) {
           return '<button type="button" role="radio" data-zone="' + i + '" aria-checked="' + (i === info.zone) + '">' +
             "<b>" + esc(z.label) + "</b><span>" + (z.fee ? z.fee + " " + CUR : "FREE") + "</span></button>";
-        }).join("") + "</div></div>" : "") +
+        }).join("") + '</div><p class="zmsg" role="alert">Please choose your delivery distance.</p></div>' : "") +
       (DLV.note ? '<p class="dlv__note">' + esc(DLV.note) + "</p>" : "") +
       field("addr", "Delivery address", 'rows="2" autocomplete="street-address" placeholder="Building / villa, street, area"', "delivery") +
       '<div class="loc" id="waLoc">' + locHTML() + "</div>" +
@@ -799,7 +831,11 @@
         var bad = null;
         if (!info.type) { bad = $("waType"); bad.classList.add("err"); }
         else if (belowMin()) { bad = $("waMin"); }
-        else if (isDelivery(info.type) && ZONES.length && !zone()) { bad = $("waZone"); bad.classList.add("err"); }
+        else if (isDelivery(info.type) && ZONES.length && !zone()) {
+          bad = $("waZone");
+          bad.classList.remove("err"); void bad.offsetWidth;    // replay the shake on every tap
+          bad.classList.add("err");
+        }
         // delivery needs a typed address or a location pin
         else if (isDelivery(info.type) && !info.addr.trim() && !info.loc) { bad = waBody.querySelector('[data-f="addr"]'); bad.classList.add("err"); bad.focus(); }
         if (bad) { e.preventDefault(); bad.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
